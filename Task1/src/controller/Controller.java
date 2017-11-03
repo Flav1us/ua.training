@@ -17,7 +17,9 @@ public class Controller {
 	}
 	
 	public void search() {
+		//данные тут!
 		List<Integer> indexes = model.findIndexes(sourceArr, intToFind);
+		//if empty тут!! view.notvalue
 		view.show(indexes);
 	}
 	

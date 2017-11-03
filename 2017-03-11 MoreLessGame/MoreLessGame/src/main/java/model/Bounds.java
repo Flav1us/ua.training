@@ -6,8 +6,6 @@ public class Bounds {
 	private int min;
 	private int max;
 	
-
-
 	public Bounds(int min, int max) {
 		checkBounds(min, max);
 		this.min = min;
@@ -21,8 +19,6 @@ public class Bounds {
 			this.max = sourceOfRandoms.nextInt(100000);
 		} while (this.min > this.max);
 	}
-	
-	
 	
 	public void checkBounds(int min, int max) {
 		if(min > max) throw new IllegalArgumentException("Min bounds should be less then max: " + min + " > " + max);

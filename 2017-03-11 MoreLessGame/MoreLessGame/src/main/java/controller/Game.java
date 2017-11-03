@@ -8,33 +8,47 @@ import model.Model;
 import view.View;
 
 public class Game {
+	public Bounds bounds = new Bounds(Controller.default_bounds.getMin(), Controller.default_bounds.getMax());
 	private int target;
-	private List<Integer> suggested = new LinkedList<>();
-	private boolean win = false;
-	public static Bounds bounds = new Bounds(0, 100);
+	private boolean won = false;
+	private Results results = new Results();
 	
 	public Game() {
-		this.target = Model.rand(Game.bounds);
+		//System.out.println(bounds.getMin() + "\t" + bounds.getMax());
+		this.target = Model.rand(bounds);
+	}
+	
+	public Game(Bounds bounds) {
+		this.bounds = bounds;
+		this.target = Model.rand(bounds);
 	}
 	
 	public void doRound(int suggestion) {
-		suggested.add(suggestion);
+		//results.update(suggestion); in Controller
 		int direction = Model.whereToGo(suggestion, target, bounds);
 		if(direction == 0) {
-			win = true;
+			won = true;
 		}
 		else if (direction == Model.LEFT) {
 			bounds.setMax(suggestion);
 			View.print(Controller.LESS);
 		}
-		else {
+		else if (direction == Model.RIGHT) {
 			bounds.setMin(suggestion);
 			View.print(Controller.MORE);
 		}
 	}
 	
+	public Results getResults() {
+		return results;
+	}
+	
 	public boolean isWon() {
-		return win;
+		return won;
+	}
+
+	public void updateResults(int suggestion) {
+		results.update(suggestion);
 	}
 
 }
