@@ -1,6 +1,5 @@
 package controller;
 
-import java.time.temporal.IsoFields;
 import java.util.Scanner;
 
 import model.Account;
@@ -9,6 +8,7 @@ import model.Notebook;
 import view.View;
 
 public class Controller {
+	@SuppressWarnings("unused")
 	private Model model;
 	private View view;
 	
@@ -22,9 +22,33 @@ public class Controller {
 	public void processUser() {
 		Notebook notebook = new Notebook();
 		view.printStored("intro");
+		ConsoleReader cr = new ConsoleReader(view);
 		do {
-			notebook.addAccount(getAccount());
+			tryAddAccount(notebook, cr);
 		} while(wantAddAnotherAcc());
+	}
+
+	private void tryAddAccount(Notebook notebook, ConsoleReader cr) {
+		try {
+			notebook.addAccount(cr.getAccount());
+		}
+		catch (LoginExistsException exists) {
+			addWithAnotherLogin(notebook, cr, exists);
+		}
+	}
+
+	private void addWithAnotherLogin(Notebook notebook, ConsoleReader cr, LoginExistsException exists) {
+		while(true) {
+			view.printStored("login_exists");
+			String new_login = cr.getFromConsole(AccountParameter.NICK_NAME);
+			try {
+				notebook.addAccount(new Account(exists.first_name, exists.last_name, new_login));
+				break;
+			}
+			catch(LoginExistsException e) {
+				continue;
+			}
+		}
 	}
 	
 	private boolean wantAddAnotherAcc() {
@@ -33,52 +57,4 @@ public class Controller {
 		return response.equals("Y");
 	}
 
-	public Account getAccount() {
-		String first_name = getFirstName();
-		String last_name = getLastName();
-		String nick_name = getNickName();
-		return new Account(first_name, last_name, nick_name);
-	}
-	
-	public String getFirstName() {
-		view.printStored("account.need_first_name");
-		String first_name;
-		do {
-			first_name = sc.nextLine();
-			if(Validator.isFirstNameValid(first_name)) {
-				return first_name;
-			}
-			else {
-				view.printStored("account.invalid_first_name");
-			}
-		} while (true);
-	}
-	
-	public String getLastName() {
-		view.printStored("account.need_last_name");
-		String last_name;
-		do {
-			last_name = sc.nextLine();
-			if(Validator.isLastNameValid(last_name)) {
-				return last_name;
-			}
-			else {
-				view.printStored("account.invalid_last_name");
-			}
-		} while (true);
-	}
-	
-	public String getNickName() {
-		view.printStored("account.need_nick_name");
-		String nick_name;
-		do {
-			nick_name = sc.nextLine();
-			if(Validator.isNickNameValid(nick_name)) {
-				return nick_name;
-			}
-			else {
-				view.printStored("account.invalid_nick_name");
-			}
-		} while (true);
-	}
 }
