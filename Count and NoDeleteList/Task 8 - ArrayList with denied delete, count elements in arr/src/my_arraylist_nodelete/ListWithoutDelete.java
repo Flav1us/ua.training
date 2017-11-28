@@ -3,11 +3,16 @@ package my_arraylist_nodelete;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListWithoutDelete<T>{
+public class ListWithoutDelete<T> extends ArrayList<T>{
 	
-	private List<T> container = new ArrayList<>();
+	//private List<T> container = new ArrayList<>();
+	//агрегация ломается через reflection
 	
-	public boolean	add(T e) {
+	public boolean remove(Object o) {
+		throw new UnsupportedOperationException();
+	}
+	
+	/*public boolean	add(T e) {
 		return container.add(e);
 	}
 	
@@ -23,5 +28,5 @@ public class ListWithoutDelete<T>{
 		return container.toString();
 	}
 	
-	//and so on, but no remove()
+	//and so on, but no remove()*/
 }
