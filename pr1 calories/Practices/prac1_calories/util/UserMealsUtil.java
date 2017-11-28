@@ -39,24 +39,25 @@ public class UserMealsUtil {
     }
 
     public static List<UserMealWithExceed>  getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-    	List<UserMealWithExceed> mealWithExceedList = new ArrayList<>();
-    	//Iterator<UserMeal> i = mealList.iterator();
     	Map<LocalDate, Integer> totalCalPerDay = new HashMap<>();
     	
     	for(UserMeal curr : mealList) {
-    		LocalDate day = extractYMD(curr);
+    		LocalDate day = curr.getDateTime().toLocalDate();
     		if(!totalCalPerDay.containsKey(day)) {
     			totalCalPerDay.put(day, 0);
     		}
     		totalCalPerDay.put(day, totalCalPerDay.get(day) + curr.getCalories());
     	}
     	
-    	for(Map.Entry<LocalDate, Integer> e : totalCalPerDay.entrySet())  {System.out.println(e.getKey() + "\t" + e.getValue());}
+    	for(Map.Entry<LocalDate, Integer> e : totalCalPerDay.entrySet())  {
+    		System.out.println(e.getKey() + "\t" + e.getValue());
+    	}
     	
+    	List<UserMealWithExceed> mealWithExceedList = new ArrayList<>();
     	for(UserMeal curr : mealList) {
     		if(TimeUtil.isBetween(curr.getDateTime().toLocalTime(), startTime, endTime)) {
-    			boolean exceed = (totalCalPerDay.get(extractYMD(curr)) > caloriesPerDay);
-    			UserMealWithExceed umwe = new UserMealWithExceed(curr.getDateTime(), curr.getDescription(), curr.getCalories(), exceed);
+    			boolean exceed = (totalCalPerDay.get(curr.getDateTime().toLocalDate()) > caloriesPerDay);
+    			UserMealWithExceed umwe = addExceed(curr, exceed);
     			mealWithExceedList.add(umwe);
     		}
     	}
@@ -64,9 +65,11 @@ public class UserMealsUtil {
     	return mealWithExceedList;
     }
 
-	private static LocalDate extractYMD(UserMeal curr) {
-		return LocalDate.of(curr.getDateTime().getYear(), curr.getDateTime().getMonth(), curr.getDateTime().getDayOfMonth());
+	private static UserMealWithExceed addExceed(UserMeal curr, boolean exceed) {
+		UserMealWithExceed umwe = new UserMealWithExceed(curr.getDateTime(), curr.getDescription(), curr.getCalories(), exceed);
+		return umwe;
 	}
+
     
 
 }
