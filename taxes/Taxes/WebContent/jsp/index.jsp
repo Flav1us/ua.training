@@ -7,8 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="post">
-		<input type="button" onclick="submit">
-	</form>	
+сука
+<form action="ControllerServlet" method="post">
+	<select name="locale">
+		<option selected> en-US </option>
+		<option> uk-UA </option>
+	</select>
+	<br>
+	<input type="text" name="ID" value="PersonID (int)"><br>
+	<input type="submit" value="Submit">
+</form>
+
 </body>
 </html>

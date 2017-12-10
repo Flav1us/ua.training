@@ -1,5 +1,6 @@
 package db_mysql;
 
+import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,11 +9,15 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
+
+import entity.IncomeType;
+
 public class DBAccess {
 
     public static Map<IncomeType, Double> getIncome(int ID){
     	String connProp = "jdbc:" + "mysql:" + "//localhost/" + "training.proj1.taxes";
-    	Map<IncomeType, Double> res = new HashMap<>();
+    	Map<IncomeType, Double> result = new HashMap<>();
 
     	loadDriver();
     	
@@ -20,16 +25,17 @@ public class DBAccess {
     		Statement query = con.createStatement();
     		ResultSet rs = query.executeQuery("SELECT type, amount FROM income where personID = " + ID + ";");
     		while(rs.next()){
-    			res.put(IncomeType.getByName(rs.getString("type")),
-    					Double.parseDouble(rs.getString("amount")));
+    			result.put(IncomeType.getByName(rs.getString("type")),
+    					   Double.parseDouble(rs.getString("amount")));
     		}
     		rs.close();
     	}
     	catch (SQLException e) {
-    		e.printStackTrace();
+    		//cant fix this inside the program
+    		throw new RuntimeException(e.getMessage());
     	}
     	
-    	return res;
+    	return result;
     }
 
 	private static void loadDriver() {

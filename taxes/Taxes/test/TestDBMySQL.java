@@ -5,7 +5,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import db_mysql.DBAccess;
-import db_mysql.IncomeType;
+import entity.IncomeType;
 
 public class TestDBMySQL {
 	@Test

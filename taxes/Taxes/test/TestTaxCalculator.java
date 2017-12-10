@@ -4,8 +4,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import db_mysql.IncomeType;
-import model.TaxCalculator;
+import entity.IncomeType;
+import service.TaxCalculator;
 
 public class TestTaxCalculator {
 	@Test

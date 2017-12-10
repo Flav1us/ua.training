@@ -1,8 +1,8 @@
 import org.junit.Test;
 
-import db_mysql.IncomeType;
-import model.TaxSorter;
-import model.TaxCalculator;
+import entity.IncomeType;
+import service.TaxCalculator;
+import service.TaxSorter;
 
 import static org.junit.Assert.*;
 

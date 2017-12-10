@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import db_mysql.IncomeType;
+import entity.IncomeType;
 
 public class TestIncomeTypeGetByName {
 	@Test

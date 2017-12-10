@@ -1,10 +1,10 @@
-package model;
+package service;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import db_mysql.DBAccess;
-import db_mysql.IncomeType;
+import entity.IncomeType;
 
 public class TaxCalculator {
 	

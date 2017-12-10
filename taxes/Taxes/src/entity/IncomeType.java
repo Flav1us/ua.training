@@ -1,4 +1,4 @@
-package db_mysql;
+package entity;
 
 import java.util.Arrays;
 
