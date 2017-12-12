@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import entity.IncomeType;
 import service.TaxCalculator;
+import service.TaxSorter;
 
 public class View {
 	String ua_msg_source = "localization.messages_uk-UA";
@@ -51,6 +52,10 @@ public class View {
 	
 	public String getPage() {
 		return page.toString();
+	}
+
+	public void addAllSortedTaxes(Map<IncomeType, Double> all) {
+		addAllTaxes(TaxSorter.sort(all));
 	}
 
 }

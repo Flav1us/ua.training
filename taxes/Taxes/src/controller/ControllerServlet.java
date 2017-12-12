@@ -40,9 +40,11 @@ public class ControllerServlet extends HttpServlet {
 			view.addSaved("total");
 			view.add("\t" + controller.getTotal(person_id));
 			view.addAllTaxes(controller.getAll(person_id));
+			view.add("\n");
+			view.addAllSortedTaxes(controller.getAll(person_id));
 		}
 		catch (NumberFormatException e) {
-			//view.unableParseID();
+			view.addSaved("unableParseID");
 		}
 		finally {
 			response.getWriter().append(view.getPage());
