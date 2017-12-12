@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-сука
 <form action="ControllerServlet" method="post">
 	<select name="locale">
 		<option selected> en-US </option>
