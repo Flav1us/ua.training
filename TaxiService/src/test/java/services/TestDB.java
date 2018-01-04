@@ -13,7 +13,7 @@ public class TestDB {
 	@Test
 	//1. creating basic entities
 	public void Test() {
-		int client_id = 1;
+		int client_id = 6;
 		DatabaseConnector dc = new MySQLDatabaseConnector();
 		Client client = dc.getClient(client_id);
 		assertFalse(client.equals(null));
