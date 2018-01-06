@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import dao.ClientNotExistsException;
 import dao.DatabaseConnector;
 import dao.impl.MySQLDatabaseConnector;
 import entities.Client;
@@ -12,10 +13,9 @@ import entities.Client;
 public class TestDB {
 	@Test
 	//1. creating basic entities
-	public void Test() {
-		int client_id = 6;
+	public void Test() throws ClientNotExistsException {
 		DatabaseConnector dc = new MySQLDatabaseConnector();
-		Client client = dc.getClient(client_id);
+		Client client = dc.getClient("flavius1", "password");
 		assertFalse(client.equals(null));
 		assertTrue(client.getPhoneNumber().equals("80965551144"));
 	}

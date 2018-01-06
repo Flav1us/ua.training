@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>ua.training</groupId>
-  <artifactId>TaxiService</artifactId>
+  <artifactId>Taxi</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>TaxiService Maven Webapp</name>
+  <name>Taxi</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -15,18 +15,38 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.6</version>
+    	<groupId>javax.servlet</groupId>
+    	<artifactId>javax.servlet-api</artifactId>
+    	<version>3.1.0</version>
     </dependency>
     <dependency>
-  <groupId>org.apache.tomcat</groupId>
-  <artifactId>tomcat-util</artifactId>
-  <version>9.0.2</version>
-  <scope>runtime</scope>
-</dependency>
+    	<groupId>javax.servlet</groupId>
+    	<artifactId>jstl</artifactId>
+    	<version>1.2</version>
+    </dependency>
+    <dependency>
+    	<groupId>taglibs</groupId>
+    	<artifactId>standard</artifactId>
+    	<version>1.1.2</version>
+    </dependency>
+	<dependency>
+	<!-- for tomcat pool properties -->
+    	<groupId>org.apache.tomcat</groupId>
+    	<artifactId>juli</artifactId>
+    	<version>6.0.26</version>
+	</dependency>
+	<dependency>
+   	 	<groupId>mysql</groupId>
+    	<artifactId>mysql-connector-java</artifactId>
+    	<version>5.1.6</version>
+	</dependency>
+    <dependency>
+    	<groupId>commons-codec</groupId>
+    	<artifactId>commons-codec</artifactId>
+    	<version>1.10</version>
+	</dependency>
   </dependencies>
   <build>
-    <finalName>TaxiService</finalName>
+    <finalName>Taxi</finalName>
   </build>
 </project>
